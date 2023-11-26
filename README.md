@@ -1,5 +1,7 @@
 # Simple Table Component
 
+![Screenshot 1](public/screenshots/Screenshot-1.png)
+
 This project showcases the implementation of a custom table component called SimpleTable using React.js and TypeScript. The SimpleTable component is designed to display tabular data with customizable columns and cell rendering.
 
 ## Project Structure
@@ -74,6 +76,8 @@ export default App;
 ### Responsive Design for SimpleTable
 
 The SimpleTable component is designed to be responsive for smaller screens using media queries in the CSS styles. It adjusts the table layout and cell display for better readability on devices with smaller viewports.
+
+![Screenshot 2](public/screenshots/Screenshot-2.png)
 
 ## Notes and Assumptions
 
