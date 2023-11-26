@@ -77,7 +77,7 @@ export default App;
 
 The SimpleTable component is designed to be responsive for smaller screens using media queries in the CSS styles. It adjusts the table layout and cell display for better readability on devices with smaller viewports.
 
-![Screenshot 2](public/screenshots/Screenshot-2.png)
+<img src="public/screenshots/Screenshot-2.png" width="500" alt="Screenshot 2">
 
 ## Notes and Assumptions
 
