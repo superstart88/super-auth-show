@@ -1,46 +1,83 @@
-# Getting Started with Create React App
+# Simple Table Component
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project showcases the implementation of a custom table component called SimpleTable using React.js and TypeScript. The SimpleTable component is designed to display tabular data with customizable columns and cell rendering.
 
-## Available Scripts
+## Project Structure
 
-In the project directory, you can run:
+The project follows a directory structure where individual components, including the `SimpleTable.tsx`, are placed within the `components` directory.
 
-### `npm start`
+### Components
+- **SimpleTable.tsx**: Main component responsible for rendering the table based on provided data and column definitions.
+- **Label.tsx**: Renders labels based on decision status for specific columns.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Installation
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+To set up and run the project locally:
 
-### `npm test`
+1. Clone this repository.
+2. Run `npm install` to install dependencies.
+3. Start the development server with `npm start`.
+4. Access the application in your browser at `http://localhost:3000`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Usage
 
-### `npm run build`
+### Available Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- `npm start`: Starts the development server.
+- `npm run build`: Builds the app for production to the `build` folder.
+- `npm test`: Launches the test runner.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to Use SimpleTable Component
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Mandatory Props
 
-### `npm run eject`
+1. `columnDefs` (Array of ColumnDef objects):
+   - Defines the characteristics of each table column.
+   - Users can optionally pass a `cellRenderer` function via ColumnDef. If provided, the function will be used to create the content of the cell.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+2. `data` (Array of Record<string, object>):
+   - Contains the data to be displayed in the table.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Additional Props (Optional)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Users can add other props based on specific requirements or additional functionalities needed for the SimpleTable component.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### Sample Usage
 
-## Learn More
+```jsx
+import React from 'react';
+import SimpleTable from './components/SimpleTable';
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+const columnDefs = [
+  { headerName: 'Column 1', field: 'column1' },
+  { headerName: 'Column 2', field: 'column2', cellRenderer: (data) => <CustomComponent data={data} /> },
+  // Add more column definitions as needed
+];
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+const data = [
+  { column1: 'Value 1', column2: 'Value 2' },
+  // Add more data objects as needed
+];
+
+const App = () => {
+  return (
+    <div>
+      <h1>SimpleTable Example</h1>
+      <SimpleTable columnDefs={columnDefs} data={data} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+### Responsive Design for SimpleTable
+
+The SimpleTable component is designed to be responsive for smaller screens using media queries in the CSS styles. It adjusts the table layout and cell display for better readability on devices with smaller viewports.
+
+## Notes and Assumptions
+
+- The project has been implemented using React, TypeScript, and minimal dependencies to maintain simplicity and reduce external dependencies.
+- Styling is done using CSS without relying on libraries like Bootstrap or Ant Design.
+
+Feel free to extend the SimpleTable component or add additional features based on specific requirements.
