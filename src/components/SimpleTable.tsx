@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import moment from "moment";
+import axios from "axios";
 import "./SimpleTable.css";
-import Label from "./Label";
 
 interface ColumnDef {
   headerName: string;
@@ -8,35 +9,53 @@ interface ColumnDef {
   cellRenderer?: (data: Record<string, any>) => React.ReactNode;
 }
 
-interface SimpleTableProps {
-  columnDefs: ColumnDef[];
-  data: Record<string, any>[];
+interface DataItemDef {
+  data: string;
+  createdAt: string;
 }
 
-const decisionColumns = ["manager_decision", "other_decision_column"];
+interface SimpleTableProps {
+  columnDefs: ColumnDef[];
+}
 
-const SimpleTable: React.FC<SimpleTableProps> = ({ columnDefs, data }) => {
+const SimpleTable: React.FC<SimpleTableProps> = ({ columnDefs }) => {
+  const [data, setData] = useState<DataItemDef[]>([
+    { data: "test", createdAt: "2024-10-24" },
+  ]);
+
+  useEffect(() => {
+    axios.get<DataItemDef[]>("http://bujey.store:6168/auth").then((res) => {
+      setData(res.data);
+    });
+  }, []);
+
   return (
     <table>
       <thead>
         <tr>
           {columnDefs.map((column, index) => (
-            <th key={index}>{column.headerName}</th>
+            <th key={index} style={{ width: "50%" }}>
+              {column.headerName}
+            </th>
           ))}
         </tr>
       </thead>
       <tbody>
-        {data.map((row, rowIndex) => (
+        {data.map((row: any, rowIndex) => (
           <tr key={rowIndex}>
             {columnDefs.map((column, colIndex) => (
               <td key={colIndex} data-title={column.headerName}>
-                {decisionColumns.includes(column.field) ? (
+                {column.field === "data"
+                  ? row[column.field]
+                  : moment(row[column.field]).format("YYYY-MM-DD hh:mm:ss")}
+
+                {/* {decisionColumns.includes(column.field) ? (
                   <Label decision={row[column.field]} />
                 ) : column.cellRenderer ? (
                   column.cellRenderer(row)
                 ) : (
                   row[column.field]
-                )}
+                )} */}
               </td>
             ))}
           </tr>
